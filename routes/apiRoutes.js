@@ -4,9 +4,10 @@ const { Workout } = require("../models")
 module.exports = app => {
 
     app.get("/api/workouts", async (req, res) => {
-        const data = await Workout.find({})
+        const data = await Workout.find()
         try {
-            res.send(data);
+            console.log(data)
+            res.json(data);
         } catch (error) {
             res.status(400).json(error);
         };
