@@ -4,6 +4,7 @@ module.exports = app => {
     // GET Route for pulling all of the workouts in DB.
     app.get("/api/workouts", async (req, res) => {
         const workouts = await Workout.find()
+        console.log(workouts)
         try {
             res.json(workouts);
         } catch (error) {
