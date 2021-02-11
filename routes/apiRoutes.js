@@ -37,10 +37,19 @@ module.exports = (app) => {
   });
 
   app.get("/api/workouts/range", async (req, res) => {
+    // Dynamically start our week of from this last Sunday from current week and then end it on the Saturday of the current week.
+    const today = new Date;
+    const startOfWeek = today.getDate() - today.getDay();
+    const endOfWeek = startOfWeek + 6;
+    const beginningRange = new Date(today.setDate(startOfWeek));
+    const endRange = new Date(today.setDate(endOfWeek));
+
+    console.log(beginningRange, endRange)
+
     const range = await Workout.find({
       day: {
-        $gte: new Date().setDate(new Date().getDate() - 7),
-        $lte: Date.now(),
+        $gte: beginningRange,
+        $lte: endRange,
       },
     });
     console.log(range);
