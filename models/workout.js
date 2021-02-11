@@ -1,7 +1,10 @@
+// Mongoose model declartion setup.
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
+// Define the mongoose Schema method as a const we can neatly call upon.
 const Schema = mongoose.Schema;
 
+// Our Workout schema.
 const WorkoutSchema = new Schema(
   {
     day: {
@@ -33,12 +36,14 @@ const WorkoutSchema = new Schema(
   }
 );
 
+// A virtual for the total duration of a workout as we don't want it to be in the actual model itself.
 WorkoutSchema.virtual("totalDuration").get(function () {
   return this.exercises.reduce((acc, exercise) => {
     return acc + exercise.duration;
   }, 0);
 });
 
+// A const that we will use as the mold for creating new workouts.
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
 module.exports = Workout;
