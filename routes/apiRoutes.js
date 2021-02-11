@@ -5,7 +5,6 @@ module.exports = app => {
     app.get("/api/workouts", async (req, res) => {
         const workouts = await Workout.find()
         try {
-            console.log(workouts)
             res.json(workouts);
         } catch (error) {
             res.status(400).json(error);
