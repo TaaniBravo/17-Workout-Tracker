@@ -52,7 +52,15 @@ module.exports = (app) => {
         $lte: endRange,
       },
     });
-    console.log(range);
+
+    // for (let i = 0; i <= range.length; i++) {
+    //   if (range[i].day.getDay() !== i) {
+    //     range.splice(position, i, {})
+    //   }
+    // }
+
+    // console.log(range)
+
     try {
       res.status(200).json(range);
     } catch (error) {
